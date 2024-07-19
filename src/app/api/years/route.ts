@@ -10,20 +10,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     
     return new NextResponse(
         getFrameHtmlResponse({
-            buttons: [
-                {   
-                    // action: 'tx',
-                    label: 'Enter your desired duration',
-                    // target: `${NEXT_PUBLIC_URL}/api/tx?basename=${encodeURIComponent(name)}`
-                },
-            ],
             image: {
                 src: `${NEXT_PUBLIC_URL}/complete/baseblock.jpg`,
-            },
-            input: {
-                text: 'Mint your own basename'
-              },
-
+            }
         })
     )
 }
