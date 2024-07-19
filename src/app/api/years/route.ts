@@ -18,7 +18,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 },
             ],
             image: {
-                src: `${NEXT_PUBLIC_URL}/complete/finish.png`,
+                src: `${NEXT_PUBLIC_URL}/complete/baseblock.jpg`,
             },
             input: {
                 text: 'Mint your own basename'
