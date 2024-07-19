@@ -20,8 +20,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
             input: {
                 text: 'Mint your own basename'
               },
-            
-
+              postUrl: `${NEXT_PUBLIC_URL}/api/years`
+        
         })
     )
 }
@@ -29,3 +29,4 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 export async function POST(req: NextRequest): Promise<Response> {
     return getResponse(req);
 }
+export const dynamic = 'force-dynamic';
