@@ -10,7 +10,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 {   
                     action: 'tx',
                     label: 'Enter your desired basename',
-                    target: `${NEXT_PUBLIC_URL}/api/years`
+                    target: `${NEXT_PUBLIC_URL}/api/years`,
+                    postUrl: `${NEXT_PUBLIC_URL}/api/years`
                 }
             ],
             image: {
@@ -19,7 +20,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
             input: {
                 text: 'Mint your own basename'
               },
-            postUrl: `${NEXT_PUBLIC_URL}/api/years`
+            
 
         })
     )

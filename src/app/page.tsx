@@ -7,10 +7,13 @@ import { NEXT_PUBLIC_URL } from "./config";
 
 const frameMetaData = getFrameMetadata({
   buttons: [
-    {
-      label: 'Welcome to Basenames'
+    {   
+        action: 'tx',
+        label: 'Enter your desired basename',
+        target: `${NEXT_PUBLIC_URL}/api/mint`,
+        postUrl: `${NEXT_PUBLIC_URL}/api/mint`
     }
-  ],
+],
   image: {
     src: `${NEXT_PUBLIC_URL}/home/base.jpg`
   },

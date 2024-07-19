@@ -10,6 +10,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     
     return new NextResponse(
         getFrameHtmlResponse({
+            
             image: {
                 src: `${NEXT_PUBLIC_URL}/complete/baseblock.jpg`,
             }
