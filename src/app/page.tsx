@@ -17,6 +17,9 @@ const frameMetaData = getFrameMetadata({
   image: {
     src: `${NEXT_PUBLIC_URL}/home/base.jpg`
   },
+  input: {
+    text: 'Mint your own basename'
+  },
   postUrl: `${NEXT_PUBLIC_URL}/api/mint`
 })
 
