@@ -10,7 +10,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 {   
                     action: 'tx',
                     label: 'Enter your desired basename',
-                    target: `${NEXT_PUBLIC_URL}api/years`
+                    target: `${NEXT_PUBLIC_URL}/api/years`
                 }
             ],
             image: {
