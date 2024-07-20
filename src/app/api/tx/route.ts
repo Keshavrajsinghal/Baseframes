@@ -18,15 +18,15 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
     // }
     const { untrustedData } = body;
     const searchParams = req.nextUrl.searchParams;
-    const basename = searchParams.get('basename');
+    // const basename = searchParams.get('basename');
     console.log('serach url', req.nextUrl);
     console.log('serach params', req.nextUrl.searchParams);
     console.log('message', untrustedData);
-    console.log('Basename', basename);
+    // console.log('Basename', basename);
     const years = parseInt(untrustedData.inputText);
 
     const registerRequest = {
-            name: basename, // The name being registered.
+            name: 'name', // The name being registered.
             owner: address, // The address of the owner for the name.
             duration: secondsInYears(years), // The duration of the registration in seconds.
             resolver: '0x8d2D30cdE6c46BC81824d0732cE8395c58da3939', // The address of the resolver to set for this name.

@@ -16,7 +16,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 {   
                     action: 'tx',
                     label: 'Enter your desired duration',
-                    target: `${NEXT_PUBLIC_URL}/api/tx?basename=${encodeURIComponent(name)}`
+                    // target: `${NEXT_PUBLIC_URL}/api/tx?basename=${encodeURIComponent(name)}`
+                    target: `${NEXT_PUBLIC_URL}/api/tx`
                 },
             ],
             image: {
