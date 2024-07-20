@@ -8,10 +8,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         getFrameHtmlResponse({
             buttons: [
                 {   
-                    action: 'tx',
+                    action: 'post',
                     label: 'Enter your desired basename',
                     target: `${NEXT_PUBLIC_URL}/api/years`,
-                    postUrl: `${NEXT_PUBLIC_URL}/api/years`
                 }
             ],
             image: {
