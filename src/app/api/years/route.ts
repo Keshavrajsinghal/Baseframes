@@ -7,6 +7,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     const body: FrameRequest = await req.json();
     const { untrustedData } = body;
     const name = untrustedData.inputText;
+    try {
+
     
     return new NextResponse(
         getFrameHtmlResponse({
@@ -26,6 +28,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
 
         })
     )
+} 
+catch (e) {
+    console.log('error', e);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+
+}
 }
 
 export async function POST(req: NextRequest): Promise<Response> {
