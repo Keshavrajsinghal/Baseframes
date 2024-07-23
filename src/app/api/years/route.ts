@@ -1,22 +1,23 @@
 import { NEXT_PUBLIC_URL } from "@/app/config";
-import { FrameRequest, getFrameHtmlResponse } from "@coinbase/onchainkit/core";
+import { FrameRequest, getFrameHtmlResponse, getFrameMessage } from "@coinbase/onchainkit/core";
 import { NextRequest, NextResponse } from "next/server";
 
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
     const body: FrameRequest = await req.json();
     const { untrustedData } = body;
-    const name = untrustedData.inputText;
-    try {
-
     
+    const name = untrustedData.inputText;
+
+
+    try {
     return new NextResponse(
         getFrameHtmlResponse({
             buttons: [
                 {   
-                    action: 'tx',
-                    label: 'Enter your desired duration',
-                    target: `${NEXT_PUBLIC_URL}/api/tx?basename=${encodeURIComponent(name)}`
+                    action: 'post',
+                    label: 'Enter the number of years',
+                    target: `${NEXT_PUBLIC_URL}/api/confirmation`,
                     // target: `${NEXT_PUBLIC_URL}/api/tx`
                 },
             ],
@@ -26,6 +27,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
             input: {
                 text: 'Mint your own basename'
               },
+            postUrl: `${NEXT_PUBLIC_URL}/api/confirmation`,
+            state: {
+                basename: name
+            }
 
         })
     )
