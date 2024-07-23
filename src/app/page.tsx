@@ -8,7 +8,6 @@ import { NEXT_PUBLIC_URL } from "./config";
 const frameMetaData = getFrameMetadata({
   buttons: [
     {   
-        
         label: 'Enter your desired basename',
     }
 ],
