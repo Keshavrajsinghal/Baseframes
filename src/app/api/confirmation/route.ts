@@ -7,28 +7,25 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     const body: FrameRequest = await req.json();
     let isValid;
     let message;
+    let state;
+    let basename;
     try {
         const result = await getFrameMessage(body, { neynarApiKey: 'BF56615F-9028-4774-9E8C-2745308382C1' });
         isValid = result.isValid;
         message = result.message;
-        // const { isValid, message } = await getFrameMessage(body, { neynarApiKey: 'BF56615F-9028-4774-9E8C-2745308382C1' });
     } catch (e) {
         return NextResponse.json({ error: e});
     }
     
     const { untrustedData } = body;
     const years = parseInt(untrustedData.inputText);
-    const searchParams = req.nextUrl.searchParams;
-    const basename = searchParams.get('basename');
-    let state;
-    // if (message) {
-    //     state = JSON.parse(decodeURIComponent(message.state?.serialized));
-    // }
+    
     if (message?.state) {
-        state = state = JSON.parse(decodeURIComponent(message.state?.serialized));
+        state = JSON.parse(decodeURIComponent(message.state?.serialized));
+        basename = state.basename;
     }
 
-    
+
 
     try {
     return new NextResponse(
@@ -37,7 +34,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 {   
                     action: 'post',
                     label: `Years ${years} Name ${state}`,
-                    target: `${NEXT_PUBLIC_URL}/api/tx?basename=${encodeURIComponent(!basename)}`
+                    target: `${NEXT_PUBLIC_URL}/api/tx?basename=${encodeURIComponent(basename)}`
                     // target: `${NEXT_PUBLIC_URL}/api/tx`
                 },
             ],
