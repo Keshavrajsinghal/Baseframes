@@ -16,8 +16,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
             buttons: [
                 {   
                     action: 'post',
-                    label: 'Enter the number of years',
-                    target: `${NEXT_PUBLIC_URL}/api/confirmation`,
+                    label: `Enter the number of years ${name}`,
+                    target: `${NEXT_PUBLIC_URL}/api/tx`,
                     // target: `${NEXT_PUBLIC_URL}/api/tx`
                 },
             ],
@@ -27,7 +27,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
             input: {
                 text: 'Mint your own basename'
               },
-            postUrl: `${NEXT_PUBLIC_URL}/api/confirmation`,
+            postUrl: `${NEXT_PUBLIC_URL}/api/tx`,
             state: {
                 basename: name
             }
