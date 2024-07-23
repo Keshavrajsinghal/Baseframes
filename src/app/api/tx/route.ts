@@ -16,7 +16,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
     const body: FrameRequest = await req.json();
     const { untrustedData } = body;
     const years = parseInt(untrustedData.inputText);
-    
+
     let price;
     let priceInWei;
     let isValid;
@@ -76,7 +76,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
             abi: RegistrarControllerABI,
             data,
             to: '0x16ee2051a0613e5c52127755ee3110cf4cd1ca10',
-            value: priceInWei.toString(),
+            value: parseEther('0.002').toString(),
         },
     };
     return NextResponse.json(txData);
