@@ -4,6 +4,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
+    let accountAddress: string | undefined = '';
+
     const body: FrameRequest = await req.json();
     let isValid;
     let message;
@@ -24,7 +26,12 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         state = JSON.parse(decodeURIComponent(message.state?.serialized));
         basename = state.basename;
     }
-
+    if (!isValid) {
+        return new NextResponse('Message not valid', { status: 500 });
+      }
+    else {
+        accountAddress = message?.interactor.verified_accounts[0]; // To do verify 
+    }
 
 
     try {
@@ -33,7 +40,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
             buttons: [
                 {   
                     action: 'post',
-                    label: `Years ${years} Name ${basename}`,
+                    label: `Years ${years} Name ${basename} address ${accountAddress}`,
                     target: `${NEXT_PUBLIC_URL}/api/tx?basename=${encodeURIComponent(basename)}`
                     // target: `${NEXT_PUBLIC_URL}/api/tx`
                 },

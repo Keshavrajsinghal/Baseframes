@@ -50,7 +50,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
         return new NextResponse('Message not valid', { status: 500 });
       }
     else {
-        accountAddress = message?.interactor.verified_accounts[0];
+        accountAddress = message?.interactor.verified_accounts[0]; // To do verify 
     }
     
     const registerRequest = {
