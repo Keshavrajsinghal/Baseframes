@@ -33,7 +33,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
             buttons: [
                 {   
                     action: 'post',
-                    label: `Years ${years} Name ${state}`,
+                    label: `Years ${years} Name ${basename}`,
                     target: `${NEXT_PUBLIC_URL}/api/tx?basename=${encodeURIComponent(basename)}`
                     // target: `${NEXT_PUBLIC_URL}/api/tx`
                 },
@@ -42,7 +42,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 src: `${NEXT_PUBLIC_URL}/confirmation/CB.jpeg`,
             },
             input: {
-                text: `Years ${years} Name ${state}`
+                text: `Years ${years} Name ${basename}`
               },
 
         })
