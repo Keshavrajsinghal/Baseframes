@@ -3,7 +3,7 @@ import { abi } from "@/app/contracts/RegistrarControllerAbi";
 import { getNameRegistrationPrice } from "@/app/utility/getNameRegistrationPrice";
 import { FrameRequest, FrameTransactionResponse, getFrameMessage } from "@coinbase/onchainkit/frame";
 import { NextRequest, NextResponse } from "next/server";
-import { encodeFunctionData, parseEther } from "viem";
+import { encodeFunctionData, parseEther, toHex } from "viem";
 import { baseSepolia } from "viem/chains";
 
 function secondsInYears(years: number): bigint {
@@ -76,7 +76,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
             abi: RegistrarControllerABI,
             data,
             to: '0x3a0e8c2a0a28f396a5e5b69edb2e630311f1517a',
-            value: price,
+            value: toHex(priceInWei),
         },
     };
     return NextResponse.json(txData);
