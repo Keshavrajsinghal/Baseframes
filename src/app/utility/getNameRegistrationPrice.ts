@@ -23,22 +23,6 @@ function normalizedEnsDomainName(name: string) {
     }
 }
 
-
-// export async function getNameRegistrationPrice(name: string, years: number) {
-
-//     const provider = new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_ALCHEMY);
-//     const contract = new ethers.Contract(USERNAME_REGISTRAR_CONTROLLER_ADDRESS, RegistrarControllerABI, provider);
-
-//     const normalizedName = normalizedEnsDomainName(name);
-//     try {
-//         const price = await contract.registerPrice(normalizedName, secondsInYears(years));
-//         return formatEther(price); 
-//     } catch (e) {
-//         console.error('Error fetching price');
-//     }
-
-// }
-
 export async function getNameRegistrationPrice(name: string, years: number) {
     const client = createPublicClient({
         chain: baseSepolia,

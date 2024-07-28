@@ -59,7 +59,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 {   
                     action: 'post',
                     label: `Years ${years} Name ${basename} address ${accountAddress}`,
-                    target: `${NEXT_PUBLIC_URL}/api/tx?basename=${encodeURIComponent(typeof(price))}`
+                    target: `${NEXT_PUBLIC_URL}/api/tx?basename=${encodeURIComponent(basename)}`
                     // target: `${NEXT_PUBLIC_URL}/api/tx`
                 },
             ],

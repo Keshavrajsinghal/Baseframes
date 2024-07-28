@@ -15,10 +15,10 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         getFrameHtmlResponse({
             buttons: [
                 {   
-                    action: 'post',
+                    action: 'tx',
                     label: `Enter the number of years ${name}`,
-                    target: `${NEXT_PUBLIC_URL}/api/confirmation`,
-                    // target: `${NEXT_PUBLIC_URL}/api/tx`
+                    // target: `${NEXT_PUBLIC_URL}/api/confirmation`,
+                    target: `${NEXT_PUBLIC_URL}/api/tx`
                 },
             ],
             image: {

@@ -57,7 +57,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
             name: basename, // The name being registered.
             owner: '0x74431A069d721FEe532fc6330fB0280A80AeEaF9', // The address of the owner for the name.
             duration: secondsInYears(years), // The duration of the registration in seconds.
-            resolver: '0x8d2D30cdE6c46BC81824d0732cE8395c58da3939', // The address of the resolver to set for this name.
+            resolver: '0x6533C94869D28fAA8dF77cc63f9e2b2D6Cf77eBA', // The address of the resolver to set for this name.
             data: [], //  Multicallable data bytes for setting records in the associated resolver upon reigstration.
             reverseRecord: true, // Bool to decide whether to set this name as the "primary" name for the `owner`.
           
@@ -75,8 +75,8 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
         params: {
             abi: RegistrarControllerABI,
             data,
-            to: '0x16ee2051a0613e5c52127755ee3110cf4cd1ca10',
-            value: parseEther('0.002').toString(),
+            to: '0x3a0e8c2a0a28f396a5e5b69edb2e630311f1517a',
+            value: price,
         },
     };
     return NextResponse.json(txData);
