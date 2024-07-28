@@ -55,7 +55,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
     
     const registerRequest = {
             name: basename, // The name being registered.
-            owner: '0x74431A069d721FEe532fc6330fB0280A80AeEaF9', // The address of the owner for the name.
+            owner: accountAddress, // The address of the owner for the name.
             duration: secondsInYears(years), // The duration of the registration in seconds.
             resolver: '0x6533C94869D28fAA8dF77cc63f9e2b2D6Cf77eBA', // The address of the resolver to set for this name.
             data: [], //  Multicallable data bytes for setting records in the associated resolver upon reigstration.
