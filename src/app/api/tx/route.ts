@@ -76,7 +76,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
             abi: RegistrarControllerABI,
             data,
             to: '0x3a0e8c2a0a28f396a5e5b69edb2e630311f1517a',
-            value: parseEther('0.01').toString(),
+            value: priceInWei.toString(),
         },
     };
     return NextResponse.json(txData);
