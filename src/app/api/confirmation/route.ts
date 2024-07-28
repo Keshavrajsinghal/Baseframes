@@ -42,14 +42,6 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         return name.replace(/[^a-zA-Z0-9À-ÿ-]/g, '');
       };
 
-    function normalizedEnsDomainName(name: string) {
-        try {
-            return normalize(name);
-          } catch (error) {
-            return normalize(sanitizeEnsDomainName(name));
-        }
-    }
-    const tryName = normalizedEnsDomainName(basename);
     
     // try {
     //     price = await getNameRegistrationPrice(basename, years);
@@ -66,7 +58,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
             buttons: [
                 {   
                     action: 'post',
-                    label: `Years ${years} Name ${tryName} address ${accountAddress}`,
+                    label: `Years ${years} Name ${basename} address ${accountAddress}`,
                     target: `${NEXT_PUBLIC_URL}/api/tx?basename=${encodeURIComponent(basename)}`
                     // target: `${NEXT_PUBLIC_URL}/api/tx`
                 },
@@ -75,7 +67,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 src: `${NEXT_PUBLIC_URL}/confirmation/CB.jpeg`,
             },
             input: {
-                text: `Years ${years} Name ${tryName}`
+                text: `Years ${years} Name ${basename}`
               },
 
         })

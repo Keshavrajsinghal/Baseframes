@@ -2,7 +2,8 @@ import { ethers } from 'ethers';
 import { USERNAME_REGISTRAR_CONTROLLER_ADDRESS } from '../config';
 import RegistrarControllerABI from '../abi/RegistrarControllerABI';
 import { normalize } from 'viem/ens';
-import { formatEther } from 'viem';
+import { createPublicClient, formatEther, http } from 'viem';
+import { baseSepolia } from 'viem/chains';
 
 
 const sanitizeEnsDomainName = (name: string) => {
@@ -23,17 +24,39 @@ function normalizedEnsDomainName(name: string) {
 }
 
 
+// export async function getNameRegistrationPrice(name: string, years: number) {
+
+//     const provider = new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_ALCHEMY);
+//     const contract = new ethers.Contract(USERNAME_REGISTRAR_CONTROLLER_ADDRESS, RegistrarControllerABI, provider);
+
+//     const normalizedName = normalizedEnsDomainName(name);
+//     try {
+//         const price = await contract.registerPrice(normalizedName, secondsInYears(years));
+//         return formatEther(price); 
+//     } catch (e) {
+//         console.error('Error fetching price');
+//     }
+
+// }
+
 export async function getNameRegistrationPrice(name: string, years: number) {
-
-    const provider = new ethers.JsonRpcProvider(process.env.NEXT_PUBLIC_ALCHEMY);
-    const contract = new ethers.Contract(USERNAME_REGISTRAR_CONTROLLER_ADDRESS, RegistrarControllerABI, provider);
-
+    const client = createPublicClient({
+        chain: baseSepolia,
+        transport: http(process.env.NEXT_PUBLIC_ALCHEMY),
+    });
     const normalizedName = normalizedEnsDomainName(name);
+
     try {
-        const price = await contract.registerPrice(normalizedName, secondsInYears(years));
-        return formatEther(price); 
+        const price = await client.readContract({
+            address: USERNAME_REGISTRAR_CONTROLLER_ADDRESS,
+            abi: RegistrarControllerABI,
+            functionName: 'registerPrice',
+            args: [normalizedName, secondsInYears(years)],
+        })
+        return formatEther(price);
     } catch (e) {
-        console.error('Error fetching price');
+        console.error('Error fetching price:', e);
+        throw e;
     }
 
 }
