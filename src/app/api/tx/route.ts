@@ -1,5 +1,5 @@
 import RegistrarControllerABI from "@/app/abi/RegistrarControllerABI";
-import { abi } from "@/app/contracts/RegistrarControllerAbi";
+// import { abi } from "@/app/contracts/RegistrarControllerAbi";
 import { getNameRegistrationPrice } from "@/app/utility/getNameRegistrationPrice";
 import { FrameRequest, FrameTransactionResponse, getFrameMessage } from "@coinbase/onchainkit/frame";
 import { NextRequest, NextResponse } from "next/server";
@@ -76,7 +76,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
             abi: RegistrarControllerABI,
             data,
             to: '0x3a0e8c2a0a28f396a5e5b69edb2e630311f1517a',
-            value: priceInWei.toString(),
+            value: parseEther('0.01').toString(),
         },
     };
     return NextResponse.json(txData);
