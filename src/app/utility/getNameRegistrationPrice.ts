@@ -42,7 +42,8 @@ function normalizedEnsDomainName(name: string) {
 export async function getNameRegistrationPrice(name: string, years: number) {
     const client = createPublicClient({
         chain: baseSepolia,
-        transport: http(process.env.NEXT_PUBLIC_ALCHEMY),
+        // transport: http(process.env.NEXT_PUBLIC_ALCHEMY)
+        transport: http(),
     });
     const normalizedName = normalizedEnsDomainName(name);
 
@@ -53,8 +54,8 @@ export async function getNameRegistrationPrice(name: string, years: number) {
             functionName: 'registerPrice',
             args: [normalizedName, secondsInYears(years)],
         })
-        // return formatEther(price);
-        return '1'
+        return formatEther(price);
+        // return '1'
     } catch (e) {
         console.error('Error fetching price:', e);
         throw e;
