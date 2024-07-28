@@ -2,6 +2,7 @@ import { ethers } from 'ethers';
 import { USERNAME_REGISTRAR_CONTROLLER_ADDRESS } from '../config';
 import RegistrarControllerABI from '../abi/RegistrarControllerABI';
 import { normalize } from 'viem/ens';
+import { formatEther } from 'viem';
 
 
 const sanitizeEnsDomainName = (name: string) => {
@@ -30,7 +31,7 @@ export async function getNameRegistrationPrice(name: string, years: number) {
     const normalizedName = normalizedEnsDomainName(name);
     try {
         const price = await contract.registerPrice(normalizedName, secondsInYears(years));
-        return ethers.formatEther(price); 
+        return formatEther(price); 
     } catch (e) {
         console.error('Error fetching price');
     }

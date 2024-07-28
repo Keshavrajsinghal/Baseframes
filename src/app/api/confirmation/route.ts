@@ -1,6 +1,8 @@
 import { NEXT_PUBLIC_URL } from "@/app/config";
+import { getNameRegistrationPrice } from "@/app/utility/getNameRegistrationPrice";
 import { FrameRequest, getFrameHtmlResponse, getFrameMessage } from "@coinbase/onchainkit/core";
 import { NextRequest, NextResponse } from "next/server";
+import { parseEther } from "viem";
 
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
@@ -11,6 +13,9 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     let message;
     let state;
     let basename;
+    let price;
+    let priceInWei;
+    
     try {
         const result = await getFrameMessage(body, { neynarApiKey: 'BF56615F-9028-4774-9E8C-2745308382C1' });
         isValid = result.isValid;
@@ -33,6 +38,14 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
         accountAddress = message?.interactor.verified_accounts[0]; // To do verify 
     }
 
+    try {
+        price = await getNameRegistrationPrice(basename, years);
+        priceInWei = parseEther(price!.toString());
+    } catch (error) {
+        console.error('Error getting registration price:', error);
+        return NextResponse.json({ error: 'Error calculating price' }, { status: 500 });
+    }
+
 
     try {
     return new NextResponse(
@@ -49,7 +62,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 src: `${NEXT_PUBLIC_URL}/confirmation/CB.jpeg`,
             },
             input: {
-                text: `Years ${years} Name ${basename}`
+                text: `Years ${years} Name ${basename} price ${price}`
               },
 
         })
