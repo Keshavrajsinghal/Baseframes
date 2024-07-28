@@ -43,13 +43,13 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
       };
 
     
-    // try {
-    //     price = await getNameRegistrationPrice(basename, years);
-    //     priceInWei = parseEther(price!.toString());
-    // } catch (error) {
-    //     console.error('Error getting registration price:', error);
-    //     return NextResponse.json({ error: 'Error calculating price' }, { status: 500 });
-    // }
+    try {
+        price = await getNameRegistrationPrice(basename, years);
+        priceInWei = parseEther(price!.toString());
+    } catch (error) {
+        console.error('Error getting registration price:', error);
+        return NextResponse.json({ error: 'Error calculating price' }, { status: 500 });
+    }
 
 
     try {
@@ -67,7 +67,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 src: `${NEXT_PUBLIC_URL}/confirmation/CB.jpeg`,
             },
             input: {
-                text: `Years ${years} Name ${basename}`
+                text: `Years ${years} Name ${basename} price ${price}`
               },
 
         })
