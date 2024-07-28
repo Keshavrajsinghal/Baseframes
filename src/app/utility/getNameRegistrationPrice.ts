@@ -53,7 +53,8 @@ export async function getNameRegistrationPrice(name: string, years: number) {
             functionName: 'registerPrice',
             args: [normalizedName, secondsInYears(years)],
         })
-        return formatEther(price);
+        // return formatEther(price);
+        return '1'
     } catch (e) {
         console.error('Error fetching price:', e);
         throw e;
