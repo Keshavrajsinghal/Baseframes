@@ -3,6 +3,7 @@ import { getNameRegistrationPrice } from "@/app/utility/getNameRegistrationPrice
 import { FrameRequest, getFrameHtmlResponse, getFrameMessage } from "@coinbase/onchainkit/core";
 import { NextRequest, NextResponse } from "next/server";
 import { parseEther } from "viem";
+import { normalize } from "viem/ens";
 
 
 async function getResponse(req: NextRequest): Promise<NextResponse> {
@@ -37,14 +38,26 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     else {
         accountAddress = message?.interactor.verified_accounts[0]; // To do verify 
     }
+    const sanitizeEnsDomainName = (name: string) => {
+        return name.replace(/[^a-zA-Z0-9À-ÿ-]/g, '');
+      };
 
-    try {
-        price = await getNameRegistrationPrice(basename, years);
-        priceInWei = parseEther(price!.toString());
-    } catch (error) {
-        console.error('Error getting registration price:', error);
-        return NextResponse.json({ error: 'Error calculating price' }, { status: 500 });
+    function normalizedEnsDomainName(name: string) {
+        try {
+            return normalize(name);
+          } catch (error) {
+            return normalize(sanitizeEnsDomainName(name));
+        }
     }
+    const tryName = normalizedEnsDomainName(basename);
+    
+    // try {
+    //     price = await getNameRegistrationPrice(basename, years);
+    //     priceInWei = parseEther(price!.toString());
+    // } catch (error) {
+    //     console.error('Error getting registration price:', error);
+    //     return NextResponse.json({ error: 'Error calculating price' }, { status: 500 });
+    // }
 
 
     try {
@@ -53,7 +66,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
             buttons: [
                 {   
                     action: 'post',
-                    label: `Years ${years} Name ${basename} address ${accountAddress}`,
+                    label: `Years ${years} Name ${tryName} address ${accountAddress}`,
                     target: `${NEXT_PUBLIC_URL}/api/tx?basename=${encodeURIComponent(basename)}`
                     // target: `${NEXT_PUBLIC_URL}/api/tx`
                 },
@@ -62,7 +75,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 src: `${NEXT_PUBLIC_URL}/confirmation/CB.jpeg`,
             },
             input: {
-                text: `Years ${years} Name ${basename} price ${price}`
+                text: `Years ${years} Name ${tryName} price ${price}`
               },
 
         })
