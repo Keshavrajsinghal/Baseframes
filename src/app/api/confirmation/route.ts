@@ -75,7 +75,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
                 src: `${NEXT_PUBLIC_URL}/confirmation/CB.jpeg`,
             },
             input: {
-                text: `Years ${years} Name ${tryName} price ${price}`
+                text: `Years ${years} Name ${tryName}`
               },
 
         })
