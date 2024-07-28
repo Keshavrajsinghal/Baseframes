@@ -14,7 +14,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse> {
     let message;
     let state;
     let basename;
-    let price;
+    let price = '0';
     let priceInWei;
     
     try {
