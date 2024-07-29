@@ -73,7 +73,7 @@ async function getResponse(req: NextRequest): Promise<NextResponse | Response> {
         chainId: `eip155:${baseSepolia.id}`,
         method: 'eth_sendTransaction',
         params: {
-            abi: RegistrarControllerABI,
+            abi: [],
             data,
             to: '0x3a0e8c2a0a28f396a5e5b69edb2e630311f1517a',
             value: priceInWei.toString(),
